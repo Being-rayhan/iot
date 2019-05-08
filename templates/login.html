@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block header_text %}
+  IoT
+{% endblock %}
+
+{% block content %}
+
+<section>
+  <div class="bx--grid">
+    <div class="bx--row">
+      <div class="bx--col-md-4 bx--offset-md-4">
+        <div class="container">
+
+    
+     <form class="login" method="POST" action="{% url 'login' %}">
+       {% csrf_token %}
+            <div class="bx--form-item mrg-top-20">
+              {{form.username}}
+              <label for="username-input" class="bx--label">User Name:</label>
+            </div>
+            <div class="bx--form-item mrg-top-20">
+              {{form.password}}
+              <label for="password-input" class="bx--label">Password:</label>
+            </div>
+
+            <div class="mrg-top-20">
+              {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                             <small style="color: red">{{ error|escape }}</small>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <small style="color: red">{{ error|escape }}</small>
+                    </div>
+                {% endfor %}
+              {% endif %}
+ 
+            </div> 
+
+            <div class="bx--form-item mrg-top-20">
+              <input class="bx--btn bx--btn--primary" type="submit" value="Login" />
+            </div>
+
+          </form>
+        
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<script type="text/javascript">
+  $("input[type='text']").addClass('bx--text-input bx--text-input--light');
+  $("input[type='password']").addClass('bx--text-input bx--text-input--light');
+</script>
+
+
+
+{% endblock %}

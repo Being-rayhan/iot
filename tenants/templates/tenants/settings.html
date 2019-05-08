@@ -1,0 +1,513 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header_text %}
+  Settings
+{% endblock %}
+
+{% block content %}
+
+
+<div class="bx--row">
+  <div class="bx--col-md-8 bx--offset-md-2">
+  		<div class="container">				
+				<nav data-tabs class="bx--tabs" role="navigation">
+				  	<div class="bx--tabs-trigger" tabindex="0">
+				    	<a href="javascript:void(0)" class="bx--tabs-trigger-text" tabindex="-1"></a>
+				    	<svg width="10" height="5" viewBox="0 0 10 5">
+				      		<path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+				    	</svg>
+				  	</div>
+				  	<ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
+				      	<li class="bx--tabs__nav-item bx--tabs__nav-item--selected" data-target=".tab-1" role="presentation">
+				        	<a id="tab-link-1" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-1" aria-selected="true">User Management</a>
+				      	</li>
+				      	<li class="bx--tabs__nav-item" data-target=".tab-2" role="presentation">
+				        	<a id="tab-link-2" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-2">Device Management</a>
+				      	</li>
+				      	<!-- <li class="bx--tabs__nav-item" data-target=".tab-3" role="presentation">
+				        	<a id="tab-link-3" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-3">Notification Management</a>
+				      	</li> -->
+				  	</ul>
+				</nav>
+				<!-- The markup below is for demonstration purposes only -->		
+		    
+	      	<div id="tab-panel-1" class="tab-1" role="tabpanel" aria-labelledby="tab-link-1" aria-hidden="false">
+            	<form method="POST" action="{% url 'tenants:org_user' %}">
+	                {% csrf_token %}
+	                <div class="bx--row mrg-top-30">
+										<div class="bx--col-md-12">
+					            <div class="bx--form-item">
+					                {{user_form.username}}
+					                <label for="text-input-3" class="bx--label">Username</label>
+					            </div>
+					            <div class="single-form-error">{{user_form.username.errors}}</div>
+					          </div>
+					        </div>
+
+					        <div class="bx--row mrg-top-30">
+					          <div class="bx--col-md-12">
+					            <div class="bx--form-item">
+					                {{user_form.first_name}}
+					                <label for="text-input-3" class="bx--label">First Name</label>
+					            </div>
+					            <div class="single-form-error">{{user_form.first_name.errors}}</div>
+					          </div>
+					        </div>
+
+					        <div class="bx--row mrg-top-30">
+					          <div class="bx--col-md-12">
+					            <div class="bx--form-item">
+					                {{user_form.last_name}}
+					                <label for="text-input-3" class="bx--label">Last Name</label>
+					            </div>
+					            <div class="single-form-error">{{user_form.last_name.errors}}</div>
+					          </div>
+					        </div>
+
+					        <div class="bx--row mrg-top-30">
+					          <div class="bx--col-md-12">
+					            <div class="bx--form-item">
+					                {{user_form.contact_number}}
+					                <label for="text-input-3" class="bx--label">Contact Number</label>
+					            </div>
+					            <div class="single-form-error">{{user_form.contact_number.errors}}</div>
+					          </div>
+					        </div>
+
+					        <div class="bx--row mrg-top-30">
+					          <div class="bx--col-md-12">
+					            <div class="bx--form-item">
+					                {{user_form.password}}
+					                <label for="text-input-3" class="bx--label">Password</label>
+					            </div>
+					            <div class="single-form-error">{{user_form.password.errors}}</div>
+					          </div>
+					        </div>
+
+					        <div class="bx--row mrg-top-30">
+					          <div class="bx--col-md-12">
+					            <div class="bx--form-item">
+					                {{user_form.confirm_password}}
+					                <label for="text-input-3" class="bx--label">Confirm Password</label>
+					            </div>
+					            <div class="single-form-error">{{user_form.confirm_password.errors}}</div>
+					          </div>
+					        </div>
+					          
+					        <div class="bx--row mrg-top-30">
+					          <div class="bx--col-md-2">
+					            <div class="bx--form-item">
+					                <input class="bx--btn bx--btn--primary" type="submit" value="Save"/>
+					            </div>
+					          </div>
+					          <div class="bx--col-md-4">
+					          	<div class="bx--form-item">
+					                <a href="{% url 'tenants:users' %}">Show Saved Users</a>
+					            </div>
+					          </div>
+					        </div>
+
+            	</form>
+
+       
+        	</div>
+		  	
+		    <div id="tab-panel-2" class="tab-2" role="tabpanel" aria-labelledby="tab-link-2" aria-hidden="true" hidden>
+		      	<!-- <section>
+							{% if sensor_form.errors %}
+							    {% for field in sensor_form %}
+							        {% for error in field.errors %}
+							            <div class="alert alert-danger">
+							                <strong>{{field.name}} - {{ error|escape }}</strong>
+							            </div>
+							        {% endfor %}
+							    {% endfor %}
+							    {% for error in sensor_form.non_field_errors %}
+							        <div class="alert alert-danger">
+							            <strong>{{ error|escape }}</strong>
+							        </div>
+							    {% endfor %}
+							{% endif %}
+						</section> -->
+
+						<section>
+							<form action="{% url 'tenants:sensor' %}" method="POST">
+								{% csrf_token %}
+								<div class="bx--row mrg-top-30">
+									<div class="bx--col-md-10">
+										<div class="bx--form-item">
+										  	<div class="bx--select width-100">
+											    <select id="network-select-id" class="bx--select-input" required>
+											    	<option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+
+											    	{% for item in data.networks %}
+											      		<option class="bx--select-option" value="{{item.id}}">{{item.name}}</option>
+											      	{% endfor %}
+											    </select>
+											    <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+											      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+											    </svg>
+											    <label for="" class="bx--label">Select Network</label>
+										  	</div>
+										</div>
+									</div>
+									<div class="bx--col-md-1">
+										<div class="bx--form-item align-end mrg-top-20">
+											<button class="bx--btn bx--btn--primary" type="button" data-modal-target="#modal-devi-net">+</button>
+										</div>
+									</div>
+
+									<div class="bx--col-md-1">
+										<div class="bx--form-item align-end mrg-top-20">
+											<a href="{% url 'tenants:networks' %}" class="btn-link"><button class="bx--btn bx--btn--primary" title="Show Saved Networks" type="button">[  ]</button></a>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="bx--row mrg-top-30">
+									<div class="bx--col-md-10">
+										<div class="bx--form-item">
+										  <div class="bx--select width-100">
+										    <select id="location-select-id" class="bx--select-input" required>
+										    	<option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+										    	{% for item in data.locations %}
+										      <option class="bx--select-option" value="{{item.id}}" network="{{item.network_id}}">{{item.name}}</option>
+										      {% endfor %}
+										    </select>
+										    <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+										      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+										    </svg>
+										    <label for="" class="bx--label">Select Location</label>
+										  </div>
+										</div>
+									</div>
+									<div class="bx--col-md-1">
+										<div class="bx--form-item align-end mrg-top-20">
+										   <button class="bx--btn bx--btn--primary" type="button" data-modal-target="#modal-devi-loca">+</button>
+										</div>
+									</div>
+
+									<div class="bx--col-md-1">
+										<div class="bx--form-item align-end mrg-top-20">
+										<a href="{% url 'tenants:locations' %}" class="btn-link">	<button class="bx--btn bx--btn--primary" title="Show Saved Locations" type="button">[  ]</button></a>
+										</div>
+									</div>
+								</div>
+
+								<div class="bx--row mrg-top-30">
+									<div class="bx--col-md-10">
+										<div class="bx--form-item">
+										  <div class="bx--select width-100">
+										    <select id="{{sensor_form.device.id_for_label}}" class="bx--select-input" name="{{sensor_form.device.html_name}}" required>
+										    	<option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+										    	{% for item in data.devices %}
+										      <option class="bx--select-option" value="{{item.id}}" location="{{item.location_id}}">{{item.name}}</option>
+										      {% endfor %}
+										    </select>
+										    <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+										      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+										    </svg>
+										    <label for="{{sensor_form.device.id_for_label}}" class="bx--label">Select Device</label>
+										  </div>
+										</div>
+									</div>
+									<div class="bx--col-md-1">
+										<div class="bx--form-item align-end mrg-top-20">
+											<button class="bx--btn bx--btn--primary" type="button" data-modal-target="#modal-devi">+</button>
+										</div>
+									</div>
+
+									<div class="bx--col-md-1">
+										<div class="bx--form-item align-end mrg-top-20">
+											<a href="{% url 'tenants:devices' %}" class="btn-link">
+												<button class="bx--btn bx--btn--primary" title="Show Saved Devices" type="button">[  ]</button>
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="bx--row mrg-top-30">
+									<div class="bx--col-md-12">
+
+										<div class="bx--form-item">
+										  <div class="bx--select width-100">
+										    <select id="{{sensor_form.sensor_type.id_for_label}}" class="bx--select-input" name="{{sensor_form.sensor_type.html_name}}" required>
+										    	<option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+										    	{% for value, text in sensor_form.sensor_type.field.choices %}
+										      <option class="bx--select-option" value="{{value}}">{{text}}</option>
+										      {% endfor %}
+										    </select>
+										    <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+										      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+										    </svg>
+										    <label for="{{sensor_form.sensor_type.id_for_label}}" class="bx--label">Select Sensor Type</label>
+										  </div>
+										</div>
+									</div>
+								</div>
+
+								<div class="bx--row mrg-top-30">
+									<div class="bx--col-md-12">
+										<div class="bx--form-item">
+											{{sensor_form.sensor_id}}
+											<label class="bx--label" for="{{sensor_form.sensor_id.id_for_label}}">Sensor ID: </label>
+										</div>
+										<div class="single-form-error">{{sensor_form.sensor_id.errors}}</div>
+									</div>
+								</div>
+
+								<div class="bx--row mrg-top-30">
+									<div class="bx--col-md-12">
+										<div class="bx--form-item">
+											{{sensor_form.upper_threshold}}
+											<label class="bx--label" for="{{sensor_form.upper_threshold.id_for_label}}">Upper Threshold: </label>
+										</div>
+										<div class="single-form-error">{{sensor_form.upper_threshold.errors}}</div>
+									</div>
+								</div>
+
+								<div class="bx--row mrg-top-30">
+									<div class="bx--col-md-12">
+										<div class="bx--form-item">
+											{{sensor_form.lower_threshold}}
+											<label class="bx--label" for="{{sensor_form.lower_threshold.id_for_label}}">Lower Threshold: </label>
+										</div>
+										<div class="single-form-error">{{sensor_form.lower_threshold.errors}}</div>
+									</div>
+								</div>
+
+								<div class="bx--row mrg-top-20">
+									<div class="bx--col-md-2">
+										<div class="bx--form-item">
+										  <input class="bx--btn bx--btn--primary" value="Save" type="submit" />
+										</div>
+									</div>
+									<div class="bx--col-md-10">
+										<a href="{% url 'tenants:sensors' %}">Show Saved Sensors</a>
+									</div>
+								</div>
+							</form>
+						</section>
+
+							<section>
+								<!-- modal for adding network -->
+								<div data-modal id="modal-devi-net" class="bx--modal " role="dialog" aria-modal="true" aria-labelledby="modal-devi-net-label" aria-describedby="modal-devi-net-heading" tabindex="-1">
+								  <div class="bx--modal-container">
+								    <div class="bx--modal-header">
+								      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
+								        <svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+								          <title>Close Modal</title>
+								          <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"
+								          />
+								        </svg>
+								      </button>
+								    </div>
+
+								    <div class="bx--modal-content">
+								    	<form action="{% url 'tenants:device_network' %}" method="POST">
+								    		{% csrf_token %}
+									      <div class="bx--form-item">
+													{{device_network_form.name}}
+													<label class="bx--label" for="{{device_network_form.name.id_for_label}}">Network Name: </label>
+												</div>
+												<div class="bx--form-item mrg-top-20">
+													<input class="bx--btn bx--btn--primary" type="submit" value="Save" />
+												</div>
+											</form>
+								    </div>
+
+								  </div>
+								</div>
+								<!-- end modal -->
+
+								<!-- modal for adding location -->
+								<div data-modal id="modal-devi-loca" class="bx--modal " role="dialog" aria-modal="true" aria-labelledby="modal-devi-loca-label" aria-describedby="modal-devi-loca-heading" tabindex="-1">
+								  <div class="bx--modal-container">
+								    <div class="bx--modal-header">
+								      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
+								        <svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+								          <title>Close Modal</title>
+								          <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"
+								          />
+								        </svg>
+								      </button>
+								    </div>
+
+								    <div class="bx--modal-content">
+								    	<form action="{% url 'tenants:device_location' %}" method="POST">
+								    		{% csrf_token %}
+								    		<div class="bx--form-item">
+								    			<div class="bx--select width-100">
+														<select id="{{device_location_form.device_network.id_for_label}}" class="bx--select-input" name="{{device_location_form.device_network.html_name}}" required>
+												    	<option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+												    	{% for item in data.networks %}
+												      <option class="bx--select-option" value="{{item.id}}">{{item.name}}</option>
+												      {% endfor %}
+												    </select>
+												    <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+												      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+												    </svg>
+												    <label for="{{device_location_form.device_network.id_for_label}}" class="bx--label">Select Network</label>
+												  </div>
+												</div>
+									      <div class="bx--form-item mrg-top-20">
+													{{device_location_form.name}}
+													<label class="bx--label" for="{{device_network_form.name.id_for_label}}">Location Name: </label>
+												</div>
+												<div class="bx--form-item mrg-top-20">
+													<input class="bx--btn bx--btn--primary" type="submit" value="Save" />
+												</div>
+											</form>
+								    </div>
+
+								  </div>
+								</div>
+								<!-- end modal -->
+
+								<!-- modal for adding device -->
+								<div data-modal id="modal-devi" class="bx--modal " role="dialog" aria-modal="true" aria-labelledby="modal-devi-label" aria-describedby="modal-devi-heading" tabindex="-1">
+								  <div class="bx--modal-container">
+								    <div class="bx--modal-header">
+								      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
+								        <svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+								          <title>Close Modal</title>
+								          <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"
+								          />
+								        </svg>
+								      </button>
+								    </div>
+
+								    <div class="bx--modal-content">
+								    	<form action="{% url 'tenants:device' %}" method="POST">
+								    		{% csrf_token %}
+								    		<div class="bx--form-item">
+								    			<div class="bx--select width-100">
+														<select id="devi-network-select-id" class="bx--select-input" required>
+												    	<option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+												    	{% for item in data.networks %}
+												      <option class="bx--select-option" value="{{item.id}}">{{item.name}}</option>
+												      {% endfor %}
+												    </select>
+												    <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+												      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+												    </svg>
+												    <label class="bx--label">Select Network</label>
+												  </div>
+												</div>
+												<div class="bx--form-item mrg-top-20">
+													<div class="bx--select width-100">
+														<select id="{{device_form.device_location.id_for_label}}" class="bx--select-input" name="{{device_form.device_location.html_name}}" required>
+												    	<option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+												    	{% for item in data.locations %}
+												      <option class="bx--select-option" value="{{item.id}}" devi-network="{{item.network_id}}">{{item.name}}</option>
+												      {% endfor %}
+												    </select>
+												    <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+												      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+												    </svg>
+												    <label for="{{device_form.device_location.id_for_label}}" class="bx--label">Select Location</label>
+												  </div>
+												</div>
+									      <div class="bx--form-item mrg-top-20">
+													{{device_form.device_id}}
+													<label class="bx--label" for="{{device_form.device_id.id_for_label}}">Device ID: </label>
+												</div>
+												<div class="bx--form-item mrg-top-20">
+													<fieldset class="bx--fieldset">
+													  <legend class="bx--label">Active</legend>
+													  <div class="bx--form-item">
+													    <input class="bx--toggle" id="devi-status" type="checkbox">
+													    <label class="bx--toggle__label" for="devi-status">
+														    <span class="bx--toggle__text--left">Off</span>
+														    <span class="bx--toggle__appearance"></span>
+														    <span class="bx--toggle__text--right">On</span>
+														  </label>
+													  </div>
+													</fieldset>
+												</div>
+												{{device_form.active}}
+												<div class="bx--form-item mrg-top-20">
+													<input class="bx--btn bx--btn--primary" type="submit" value="Save" />
+												</div>
+											</form>
+								    </div>
+
+								  </div>
+								</div>
+								<!-- end modal -->
+							</section>
+
+
+	   
+					 
+					</div>
+<!-- 
+					  <div id="tab-panel-3" class="tab-3" role="tabpanel" aria-labelledby="tab-link-3" aria-hidden="true" hidden>
+					      <p>Content for third tab goes here.</p>
+					 </div> -->
+			</div>
+	</div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="{% static 'js/select.input.config.js' %}" ></script>
+
+<script type="text/javascript">
+
+
+
+
+
+
+
+	var currentPath = window.location.href;
+	if(currentPath.includes('sensor')) {
+		$(function() {
+			$('#tab-link-2').parent().click();
+		})
+	}
+
+	var data = '{{json_data|safe}}';
+	var default_active_val = '{{device_form.active.value}}' == 'True' ? true : false; 
+	$('#devi-status').prop('checked', default_active_val);
+	$('#devi-status').change(function(e){
+		var el = $('#{{device_form.active.id_for_label}}');
+		el.val($(this).prop('checked'));
+	});
+
+	var network_select_id = 'network-select-id';
+	var location_select_id = 'location-select-id';
+	var device_select_id = '{{sensor_form.device.id_for_label}}';
+	var devi_network_select_id = 'devi-network-select-id';
+	var devi_location_select_id = '{{device_form.device_location.id_for_label}}';
+
+	var sel_data = {
+		'network': '{{selected_data.network}}',
+		'location': '{{selected_data.location}}',
+		'device': '{{selected_data.device}}',
+		'sensor_type': '{{selected_data.sensor_type}}',
+	};
+
+	if(sel_data.sensor_type) {
+    $('#{{sensor_form.sensor_type.id_for_label}}').val(sel_data.sensor_type);
+  }
+
+	__init__select_input__(
+		sel_data,
+		network_select_id,
+		location_select_id,
+		device_select_id,
+		null,
+		devi_network_select_id,
+		devi_location_select_id
+	);
+
+</script>
+
+{% endblock %}

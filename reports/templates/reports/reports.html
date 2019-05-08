@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header_text %}
+  Reports
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <section>
+    <div class="bx--grid">
+      <div class="bx--row">
+        <div class="bx--col-lg-12 mrg-top-30">
+          <form method="POST" action="{% url 'reports:index' %}">
+            {% csrf_token %}
+            <div class="bx--form-item mrg-top-20">
+              <div class="bx--select width-100">
+                <select id="network-select-id" class="bx--select-input" required>
+                  <option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+                  {% for network in data.networks %}
+                    <option class="bx--select-option" value="{{network.id}}">{{network.name}}</option>
+                  {% endfor %}
+                </select>
+                <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+                <label for="" class="bx--label">Select Network</label>
+              </div>
+            </div>
+            <div class="bx--form-item mrg-top-20">
+              <div class="bx--select width-100">
+                <select id="location-select-id" class="bx--select-input" required>
+                  <option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+                  {% for location in data.locations %}
+                  <option class="bx--select-option" value="{{location.id}}" network="{{location.network_id}}">{{location.name}}</option>
+                  {% endfor %}
+                </select>
+                <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+                <label for="" class="bx--label">Select Location</label>
+              </div>
+            </div>
+            <div class="bx--form-item mrg-top-20">
+              <div class="bx--select width-100">
+                <select id="{{device_form.device.id_for_label}}" class="bx--select-input" name="{{device_form.device.html_name}}" required>
+                  <option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+                  {% for device in data.devices %}
+                  <option class="bx--select-option" value="{{device.id}}" location="{{device.location_id}}">{{device.name}}</option>
+                  {% endfor %}
+                </select>
+                <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+                <label for="{{device_form.device.id_for_label}}" class="bx--label">Select Device</label>
+              </div>
+            </div>
+
+            <div class="bx--form-item mrg-top-20">
+              <div class="bx--select width-100">
+                <select id="{{device_form.date.id_for_label}}" class="bx--select-input" name="{{device_form.date.html_name}}" required>
+                  <option class="bx--select-option" value="" disabled selected hidden>Choose an option</option>
+                  {% for value, text in device_form.date.field.choices %}
+                    <option class="bx--select-option" value="{{value}}">{{text}}</option>
+                  {% endfor %}
+                </select>
+                <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                </svg>
+                <label for="{{device_form.date.id_for_label}}" class="bx--label">Select Date</label>
+              </div>
+            </div>
+
+            <input class="bx--btn bx--btn--primary bx--btn--sm mrg-top-20" type="submit" value="Okay" />
+          </form>
+         </div>
+      </div>
+    </div>
+  </section>
+
+  {% if selected_data %}
+  <section>
+     <div class="bx--grid mrg-top-30">
+      <div class="bx--row mrg-top-30">
+        <div class="bx--col-md-1 flex-0-2 media-mrg-btm-20">
+          <span class="bx--tag bx--tag--experimental">{{selected_data.network}}</span> 
+          <span class="tag-dir"> > </span>
+          <span class="bx--tag bx--tag--ibm">{{selected_data.location}}</span> 
+          <span class="tag-dir"> > </span>
+          <span class="bx--tag bx--tag--third-party">{{selected_data.device}}</span> 
+          <span class="tag-dir"> > </span>
+          <span class="bx--tag bx--tag--beta">{{selected_data.date}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section>
+    <div class="mrg-top-30 bx--grid">
+
+
+      {% for item in sensor_data %}
+        {% if item %}
+          {% for sensor in item %}
+            <div class="bx--row mrg-top-30">
+              <div class="bx--col-md-1 media-mrg-btm-20">
+                <div class="temp-btn">
+                  <h4>{{sensor.sensor.sensor_type}}</h4>
+                </div>
+              </div>
+              {% if sensor.data %}
+                <div class="bx--col-md-3 media-mrg-btm-20">
+                  <div class="gauge-wrapper">
+                    <canvas id="gaugeCanvas-{{sensor.sensor.id}}"></canvas>
+                  </div>
+                </div>
+                <div class="bx--col-md-8">
+                  <div class="chart-wrapper">
+                    <canvas id="chartCanvas-{{sensor.sensor.id}}"></canvas>
+                  </div>
+                </div>
+              
+              {% else %}
+                <div class="bx--col-md-11">
+                  <p>No {{sensor.sensor.sensor_type}} data available!</p>
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="bx--row mrg-top-30">
+            <div class="bx--col-md-11">
+              <p>No device data available!</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+</div>
+
+
+
+
+
+<!-- <script type="text/javascript" src="{% static 'js/f2/touch.js' %}" ></script> -->
+<script type="text/javascript" src="{% static 'js/select.input.config.js' %}" ></script>
+<script type="text/javascript">
+
+  var network_select_id = 'network-select-id';
+  var location_select_id = 'location-select-id';
+  var device_id_label = '{{device_form.device.id_for_label}}';
+
+  var sel_data = {
+    'network': '{{selected_data.network.id}}',
+    'location': '{{selected_data.location.id}}',
+    'device': '{{selected_data.device.id}}',
+    'date': '{{selected_data.date}}',
+  };
+
+  if(sel_data.date) {
+    $('#{{device_form.date.id_for_label}}').val(sel_data.date);
+  }
+
+  __init__select_input__(
+    sel_data,
+    network_select_id,
+    location_select_id,
+    device_id_label,
+  );
+
+  var json_sensor_data = '{{json_sensor_data|safe}}' ? JSON.parse('{{json_sensor_data|safe}}') : [];
+  var label = {
+      'x': 'timestamp',
+      'y': 'value',
+  };
+
+  for (var i = 0; i < json_sensor_data.length; i++) {
+    var item = json_sensor_data[i];
+    if(!item.data || !item.data.length) continue;
+    var current_data = item.data[item.data.length-1].value;
+    var sensor_unit = item.sensor.sensor_type == 'TEMPERATURE' ? 
+      '\xB0'+'celcius' : item.sensor.sensor_type == 'HUMIDITY' ?
+      '%' : item.sensor.sensor_type == 'CO2' ? 
+      'ppm': item.sensor.sensor_type == 'NH3' ?
+      'ppm' : ''; 
+    __init_gauge__('gaugeCanvas-' + item.sensor.id, item.sensor.upper_threshold, item.sensor.lower_threshold, item.latest_data, sensor_unit);
+    __init_chart__('chartCanvas-' + item.sensor.id, sensor_unit, item.sensor.upper_threshold, item.sensor.lower_threshold, current_data, item.data, label);
+  }
+
+</script>
+{% endblock %}

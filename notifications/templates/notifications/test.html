@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<section class="bx--structured-list bx--structured-list--border bx--structured-list--selection mrg-top-30" data-structured-list>
+  <div class="bx--structured-list-thead">
+    <div class="bx--structured-list-row bx--structured-list-row--header-row">
+        <div class="bx--structured-list-th">Network</div>
+        <div class="bx--structured-list-th">Location</div>
+        <div class="bx--structured-list-th">Device</div>
+        <div class="bx--structured-list-th">Sensor</div>
+    </div>
+  </div>
+
+{% for sensor in sensor_list %}
+
+  <div class="bx--structured-list-tbody">
+        <label for="apache-id" aria-label="apache spark" class="bx--structured-list-row bx--structured-list-row--selected" tabindex="0">
+          <input tabindex="-1" id="apache-id" class="bx--structured-list-input" value="apache spark" type="radio" name="services" title="apache spark" checked />
+         
+            <div class="bx--structured-list-td">{{sensor.device.device_location.device_network.name}}</div>
+            <div class="bx--structured-list-td">{{sensor.device.device_location.name}}</div>
+            <div class="bx--structured-list-td">{{sensor.device.device_id}}</div>
+            <div class="bx--structured-list-td"><a  href="{% url 'notifications:sensor_notify'  sensor.sensor_id %}">
+            <button class="bx--btn bx--btn--primary bx--btn--sm"  type="button">Show</button>
+          </a></div>
+            
+        </label>
+       
+  </div>
+
+  {% endfor %}
+</section>
+
+<form method="POST" action="{% url 'notifications:notify' %}">
+    {% csrf_token %}
+    {{ form1.as_p }}
+    {{ form2.as_p }}
+     <button class="bx--btn bx--btn--primary bx--btn--sm" type="submit">Submit</button>
+
+</form>
+
+
+{% endblock %}

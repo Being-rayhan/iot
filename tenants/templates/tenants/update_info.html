@@ -1,0 +1,281 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header_text %}
+  Settings
+{% endblock %}
+
+{% block content %}
+
+
+
+
+{% if network_form %}
+
+<div class="bx--row">
+  <div class="bx--col-md-8 bx--offset-md-2">
+      <div class="container">       
+        <nav data-tabs class="bx--tabs" role="navigation">
+            <div class="bx--tabs-trigger" tabindex="0">
+              <a href="javascript:void(0)" class="bx--tabs-trigger-text" tabindex="-1"></a>
+              <svg width="10" height="5" viewBox="0 0 10 5">
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+              </svg>
+            </div>
+            <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
+                <li class="bx--tabs__nav-item bx--tabs__nav-item--selected" data-target=".tab-1" role="presentation">
+                  <a id="tab-link-1" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-1" aria-selected="true">Update Network</a>
+                </li>
+              
+                
+            </ul>
+        </nav>
+        <!-- The markup below is for demonstration purposes only -->    
+        
+          <div id="tab-panel-1" class="tab-1" role="tabpanel" aria-labelledby="tab-link-1" aria-hidden="false">
+              
+            <section>
+
+              <form method="POST" action="{% url 'tenants:update_network' network_id=network_form.instance.id %}">
+                  {% csrf_token %}
+                  <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          {{network_form.name}}
+                          <label for="text-input-3" class="bx--label">Network Name</label>
+                      </div>
+                      <div class="single-form-error"><!-- {{user_form.username.errors}} --></div>
+                    </div>
+                  </div>
+               
+                    
+                  <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          <input class="bx--btn bx--btn--primary" type="submit" value="Update"/>
+                      </div>
+                    </div>
+                  </div>
+
+              </form>
+           
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+  {% endif %}
+
+  {% if location_form %}
+
+<div class="bx--row">
+  <div class="bx--col-md-8 bx--offset-md-2">
+      <div class="container">       
+        <nav data-tabs class="bx--tabs" role="navigation">
+            <div class="bx--tabs-trigger" tabindex="0">
+              <a href="javascript:void(0)" class="bx--tabs-trigger-text" tabindex="-1"></a>
+              <svg width="10" height="5" viewBox="0 0 10 5">
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+              </svg>
+            </div>
+            <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
+                <li class="bx--tabs__nav-item bx--tabs__nav-item--selected" data-target=".tab-1" role="presentation">
+                  <a id="tab-link-1" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-1" aria-selected="true">Update Location</a>
+                </li>
+              
+                
+            </ul>
+        </nav>
+        <!-- The markup below is for demonstration purposes only -->    
+        
+          <div id="tab-panel-1" class="tab-1" role="tabpanel" aria-labelledby="tab-link-1" aria-hidden="false">
+              
+            <section>
+
+              <form method="POST" action="{% url 'tenants:update_location' location_id=location_form.instance.id %}">
+                  {% csrf_token %}
+                  <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          {{location_form.name}}
+                          <label for="text-input-3" class="bx--label">Location Name</label>
+                      </div>
+                      <div class="single-form-error"><!-- {{user_form.username.errors}} --></div>
+                    </div>
+                  </div>
+               
+                    
+                  <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          <input class="bx--btn bx--btn--primary" type="submit" value="Update"/>
+                      </div>
+                    </div>
+                  </div>
+
+              </form>
+           
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+ {% endif %}
+  
+  {% if device_form %}
+
+
+<div class="bx--row">
+  <div class="bx--col-md-8 bx--offset-md-2">
+      <div class="container">       
+        <nav data-tabs class="bx--tabs" role="navigation">
+            <div class="bx--tabs-trigger" tabindex="0">
+              <a href="javascript:void(0)" class="bx--tabs-trigger-text" tabindex="-1"></a>
+              <svg width="10" height="5" viewBox="0 0 10 5">
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+              </svg>
+            </div>
+            <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
+                <li class="bx--tabs__nav-item bx--tabs__nav-item--selected" data-target=".tab-1" role="presentation">
+                  <a id="tab-link-1" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-1" aria-selected="true">Update Device</a>
+                </li>
+              
+                
+            </ul>
+        </nav>
+        <!-- The markup below is for demonstration purposes only -->    
+        
+          <div id="tab-panel-1" class="tab-1" role="tabpanel" aria-labelledby="tab-link-1" aria-hidden="false">
+              
+            <section>
+
+              <form method="POST" action="{% url 'tenants:update_device' device_id=device_form.instance.id %}">
+                  {% csrf_token %}
+                  <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          {{device_form.device_id}}
+                          <label for="text-input-3" class="bx--label">Device ID</label>
+                      </div>
+                      <div class="single-form-error"><!-- {{user_form.username.errors}} --></div>
+                    </div>
+                  </div>
+               
+                    
+                  <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          <input class="bx--btn bx--btn--primary" type="submit" value="Update"/>
+                      </div>
+                    </div>
+                  </div>
+
+              </form>
+           
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+ {% endif %}
+  
+  {% if sensor_form %}
+
+<div class="bx--row">
+  <div class="bx--col-md-8 bx--offset-md-2">
+      <div class="container">       
+        <nav data-tabs class="bx--tabs" role="navigation">
+            <div class="bx--tabs-trigger" tabindex="0">
+              <a href="javascript:void(0)" class="bx--tabs-trigger-text" tabindex="-1"></a>
+              <svg width="10" height="5" viewBox="0 0 10 5">
+                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+              </svg>
+            </div>
+            <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
+                <li class="bx--tabs__nav-item bx--tabs__nav-item--selected" data-target=".tab-1" role="presentation">
+                  <a id="tab-link-1" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-1" aria-selected="true">Update Sensor</a>
+                </li>
+              
+                
+            </ul>
+        </nav>
+        <!-- The markup below is for demonstration purposes only -->    
+        
+          <div id="tab-panel-1" class="tab-1" role="tabpanel" aria-labelledby="tab-link-1" aria-hidden="false">
+              
+            <section>
+
+              <form method="POST" action="{% url 'tenants:update_sensor' sensor_id=sensor_form.instance.id %}">
+                  {% csrf_token %}
+                  <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          {{sensor_form.sensor_id}}
+                          <label for="text-input-3" class="bx--label">Sensor ID</label>
+                      </div>
+                      <div class="single-form-error"><!-- {{user_form.username.errors}} --></div>
+                    </div>
+                  </div>
+
+                   <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          {{sensor_form.sensor_type}}
+                          <label for="text-input-3" class="bx--label">Sensor Type</label>
+                      </div>
+                      <div class="single-form-error"><!-- {{user_form.username.errors}} --></div>
+                    </div>
+                  </div>
+
+                   <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          {{sensor_form.upper_threshold}}
+                          <label for="text-input-3" class="bx--label">Upper Threshold</label>
+                      </div>
+                      <div class="single-form-error"><!-- {{user_form.username.errors}} --></div>
+                    </div>
+                  </div>
+
+                   <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          {{sensor_form.lower_threshold}}
+                          <label for="text-input-3" class="bx--label">Lower Threshold</label>
+                      </div>
+                      <div class="single-form-error"><!-- {{user_form.username.errors}} --></div>
+                    </div>
+                  </div>
+               
+                    
+                  <div class="bx--row mrg-top-30">
+                    <div class="bx--col-md-12">
+                      <div class="bx--form-item">
+                          <input class="bx--btn bx--btn--primary" type="submit" value="Update"/>
+                      </div>
+                    </div>
+                  </div>
+
+              </form>
+           
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+ {% endif %}
+
+<script type="text/javascript" src="{% static 'js/select.input.config.js' %}" ></script>
+
+<script type="text/javascript">
+  
+</script>
+
+{% endblock %}

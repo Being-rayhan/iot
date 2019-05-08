@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>IOT Project</title>
+	<!---  Css File  --->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/others/carbon.min.css' %}">
+	<link href="{% static 'css/main.css' %}" rel="stylesheet">
+	
+	<!---  Script File  --->
+	<script src="{% static 'js/others/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/others/carbon.min.js' %}"></script>	
+	<script type="text/javascript" src="{% static 'js/f2/f2.min.js' %}" ></script>
+	<script type="text/javascript" src="{% static 'js/gauge.config.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/chart.config.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/custom.js' %}" ></script>
+	
+</head>
+<body>	
+	{% if user.is_authenticated %}
+	<div class="nav-container">
+		<button aria-label="Toggle Side Navigation" class="side-nav__toggle-btn side-nav__toggle-btn--closed" onclick="toggleSideMenu()" id="ham-btn">
+		   <div>
+		   		<span class="line ham_line_1"></span>
+		   		<span class="line ham_line_2"></span>
+		   		<span class="line ham_line_3"></span>
+		   	</div>
+		</button>
+		<nav role="navigation" aria-label="Page Navigation" aria-expanded="true" class="side-nav side-nav__closed side-nav__closed--final">
+		   	<div class="side-nav__bottom-container">
+		      	<ul role="menu" aria-label="Page main menu" class="side-nav__main-nav mrg-top-20">
+		      		{% if user.is_client %}
+		         	<li role="menuitem" tabindex="0" class="main-nav-item">
+		         		<a aria-label="What's New" tabindex="-1" class="main-nav-item__heading" href="{% url 'tenants:index' %}">Settings</a>
+		         	</li>
+		         	{% endif %}
+		         	<li role="menuitem" tabindex="0" class="main-nav-item">
+		         		<a aria-label="What's New" tabindex="-1" class="main-nav-item__heading" href="{% url 'reports:index' %}">Reports</a>
+		         	</li>
+		         		<li role="menuitem" tabindex="0" class="main-nav-item">
+		         		<a aria-label="What's New" tabindex="-1" class="main-nav-item__heading" href="{% url 'tenants:profile' %}">Profile</a>
+		         	</li>
+              <li role="menuitem" tabindex="0" class="main-nav-item">
+		         		<a aria-label="What's New" tabindex="-1" class="main-nav-item__heading" href="{% url 'logout' %}">Log Out</a>
+		         	</li>
+		      	</ul>
+		   	</div>
+		</nav>
+	</div>
+	{% endif %}
+
+	{% block header %} 
+		<section>
+			<div class="bx--row">
+				<div class="bx--col-lg-12">
+					<div class="iot-header mrg-btm-10">
+						<h4 class="header-text">
+							{% block header_text %} {% endblock %}
+						</h4>
+					</div>
+				</div>
+			</div>
+		</section>
+	{% endblock %}
+
+	
+	{% block content %}
+	{% endblock %}
+
+
+	<!-- {% block footer %} {% endblock %} -->
+
+
+	<script type="text/javascript">
+		var mother_json_url = "{% static 'js/json_data.js' %}";		
+
+		function toggleSideMenu() {
+			if (!$('.side-nav__closed').length) {
+				$('#ham-btn').addClass('side-nav__toggle-btn--closed');
+				$('.container').css({'width': '100%', 'margin-left': '0px'});
+				$('.side-nav').addClass('side-nav__closed side-nav__closed--final');
+				$('.ham_line_1').css({'transform': 'translateY(0) rotate(0)', 'transition': 'all 250ms ease-in-out'});
+				$('.ham_line_2').css('opacity', '1');
+				$('.ham_line_3').css({'transform': 'translateY(0) rotate(0)', 'transition': 'all 250ms ease-in-out'});
+			}
+			else{
+				$('.side-nav').removeClass('side-nav__closed side-nav__closed--final');
+				$('#ham-btn').removeClass('side-nav__toggle-btn--closed')
+				$('.container').css({'width': 'calc(100% - 200px)', 'margin-left': '12.5em'});
+				$('.ham_line_1').css('transform', 'translateY(5px) rotate(45deg)');
+				$('.ham_line_2').css('opacity', '0');
+				$('.ham_line_3').css('transform', 'translateY(-5px) rotate(-45deg)');
+			}
+			
+		}
+	</script>
+
+</body>
+</html>

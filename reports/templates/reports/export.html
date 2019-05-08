@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+
+<h2 class="bx--graph-header">Export</h2>
+<a href="{% url 'logout' %}">Logout</a>
+<a href="{% url 'reports:index' %}">Reports</a>
+
+
+<form action="{% url 'reports:export' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Export">
+</form>
+
+
+<style type="text/css">
+
+    body {
+      padding: 2rem 3%;
+    }
+
+      body .bx--btn {
+        display: inline-flex;
+        margin-top: 1rem;
+      }
+</style>
+
+
+<button class="bx--btn bx--btn--primary" type="button">Primary button</button>
+<button class="bx--btn bx--btn--primary" type="button" disabled>Primary button</button>
+<button class="bx--btn bx--btn--primary" type="button">
+  Primary with icon
+  <svg class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
++    <path d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
+   </svg>
+</button>
+<button class="bx--btn bx--btn--primary bx--btn--sm" type="button">Small Primary button</button>
+<button class="bx--btn bx--btn--primary bx--btn--sm" type="button">
+  Small Primary button
+ <svg class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
++    <path d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
+   </svg>
+</button>
+
+
+{% endblock %}
+
+
+

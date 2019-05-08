@@ -1,0 +1,72 @@
+
+<section>
+    {% if delete_form.errors %}
+        {% for field in delete_form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                     <small style="color: red">{{field.label}}- {{ error|escape }}</small>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in delete_form.non_field_errors %}
+            <div class="alert alert-danger">
+                <small style="color: red">{{ error|escape }}</small>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+  </section>
+  
+  <form id="delete-entry-form" action="{% url 'tenants:delete_entry' %}" method="POST">
+    {% csrf_token %}
+    {{delete_form.id_type.as_hidden}}
+    {{delete_form.all_ids.as_hidden}}
+  </form>
+
+
+
+  <script type="text/javascript">
+  
+  function delete_entry(type, id) {
+    $('#{{delete_form.id_type.id_for_label}}').val(type);
+    if(id) {
+      id = parseInt(id);
+      $('#{{delete_form.all_ids.id_for_label}}').val(id);
+    } else {
+      var all_els = $("[id*='bx--checkbox-']:checked");
+      var all_ids = '';
+      for (var i = 0; i < all_els.length; i++) {
+        var ind_id = $(all_els[i]).attr('entry-id');
+        all_ids += ind_id + (i===(all_els.length - 1) ? '' : ',');
+      }
+      $('#{{delete_form.all_ids.id_for_label}}').val(all_ids);
+    }
+
+    $('#delete-entry-form').submit();
+  }
+
+  function init_search(type) {
+    $('#search__input').on("change paste keyup", function() {
+      var matched_data = $('[id*=td-' + type + '-]');
+      for (var i = 0; i < matched_data.length; i++) {
+        $(this).val() == $(matched_data[i]).text();
+
+        if(!$(matched_data[i]).text().toLowerCase().includes($(this).val().toLowerCase())) {
+          $(matched_data[i]).closest('tr').hide();
+        } else {
+          $(matched_data[i]).closest('tr').show();
+        }
+      }
+  });
+  }
+
+  function sort(url, type) {
+    var s = location.search.split('?q=');
+    if(s[s.length - 1] == type) {
+      if(!s[s.length - 1].includes('-')) type = '-' + type;
+    }
+    window.location.replace(url + '?q=' + type);
+  }
+
+</script>
+  
